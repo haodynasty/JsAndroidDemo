@@ -1,0 +1,22 @@
+<html>
+    <script language="javascript">
+        <!--有return返回值必须处理，如果不处理在java中就会出现异常I/chromium: [INFO:CONSOLE(1)] "Uncaught ReferenceError: toastMessage is not defined", source:  (1)-->
+        function testFunc1(var1)
+        {
+            alert("Hello")
+            return_var = "原创文章：" + var1;
+            <!--调用Android代码中的 testFunc1 的函数-->
+            window.demo.testFunc1(return_var);
+            <!--有无返回值直接影响java的调用成功与否，处理返回值使用evaluateJavascript接收返回值-->
+            return return_var
+        }
+
+        function testFuncAdd(var1,var2)
+        {
+            return_var = var1 + var2;
+            <!--这里的参数就为返回到android的值-->
+            window.demo.testFuncAdd(return_var);
+        }
+
+    </script>
+</html>
