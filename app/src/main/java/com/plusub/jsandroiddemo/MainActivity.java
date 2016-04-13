@@ -2,6 +2,7 @@ package com.plusub.jsandroiddemo;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,10 +23,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 
 /**
  * @see <a href="http://www.sollyu.com/android-software-development-webview-addjavascriptinterface-cycle-of-gradual-one/">参考网页</a>
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button  m_testButtom1;
     private Button m_testButtom2;
     private Button m_testButtom3;
+    private Button m_testButtom4;
     private WebView m_WebView;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -70,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         m_testButtom1 = (Button)findViewById(R.id.button1);
         m_testButtom2 = (Button)findViewById(R.id.button2);
         m_testButtom3 = (Button)findViewById(R.id.button3);
+        m_testButtom4 = (Button)findViewById(R.id.button4);
         m_WebView = (WebView)findViewById(R.id.webview);
         m_WebView.getSettings().setJavaScriptEnabled(true);
         //Alert无法弹出,应该是没有设置WebChromeClient
@@ -112,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 testMethod(m_WebView);
             }
         });
+        m_testButtom4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainOtherActivity.class));
+            }
+        });
 
 
 
@@ -126,9 +131,6 @@ public class MainActivity extends AppCompatActivity {
 //        m_WebView.addJavascriptInterface(new JsInteration(), "control");
         //例子2
 //        m_WebView.loadUrl("file:///android_asset/js_java_interaction.html");
-
-        byte[] bytes = {0x57, 0x01, (byte)0x90, 0x1E};
-        getTime(bytes);
     }
 
 
@@ -227,34 +229,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public static long getTime(byte[] data){
-        byte[] result = new byte[4];
-        result[0] = data[3];
-        result[1] = data[2];
-        result[2] = data[1];
-        result[3] = data[0];
-
-        long timeMills = (byteArrayToInt(result) & 0xFFFFFFFF);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2000, 0, 0, 0, 0, 0);
-        timeMills = calendar.getTimeInMillis() + timeMills * 1000;
-        calendar.setTimeInMillis(timeMills);
-        System.out.println(getDateEN(calendar.getTimeInMillis())+" "+getDateEN(timeMills));
-        return timeMills;
-    }
-
-    public static int byteArrayToInt(byte[] b) {
-        return   b[3] & 0xFF |
-                (b[2] & 0xFF) << 8 |
-                (b[1] & 0xFF) << 16 |
-                (b[0] & 0xFF) << 24;
-    }
-
-    public static String getDateEN(long timeMills) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String date1 = format1.format(new Date(timeMills));
-        return date1;
     }
 }

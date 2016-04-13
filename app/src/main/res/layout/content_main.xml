@@ -35,6 +35,13 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:text="其他" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="其他2" />
     </LinearLayout>
 
     <WebView
