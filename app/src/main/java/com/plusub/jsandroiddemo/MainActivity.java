@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 String string = "http://www.sollyu.com";
                 //webView调用js的基本格式为webView.loadUrl(“javascript:methodName(parameterValues)”)
                 //有js中无return的用法
-//                m_WebView.loadUrl("javascript:testFunc1(\"" + string + "\")");   // 调用html中的JavaScript函数testFunc1,这里只有一个参数
+                m_WebView.loadUrl("javascript:testFunc1(\"" + string + "\")");   // 调用html中的JavaScript函数testFunc1,这里只有一个参数
 
                 //有js中return的用法
-                testEvaluateJavascript(m_WebView, string);
+//                testEvaluateJavascript(m_WebView, string);
             }
         });
         m_testButtom2.setOnClickListener(new View.OnClickListener() {

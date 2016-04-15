@@ -120,8 +120,8 @@ public class MainOtherActivity extends AppCompatActivity {
                 + " {"
                 + "    if(objs[i].href){"
                 + "     var href = objs[i].href;"
-                + "     console.log(href);"
-                + "     objs[i].href='';"
+                + "     console.log(href+'  '+href.indexOf('#')+' '+objs[i].innerHTML);"//indexof查找#的位置,objs[i].innerHTML是标签的内容
+                + "     objs[i].href='javascript:;';" //设置javascript:;以禁止跳转，#可跳转到顶部，http://www.cnblogs.com/lipanpan/p/4095524.html
                 + "     objs[i].onclick=function()  "
                 + "     {  "
                 + "        window.demo.openUrl(href);  "
